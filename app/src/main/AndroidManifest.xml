@@ -30,6 +30,9 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".bashaAndolon"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".muktiZuddho"
             android:parentActivityName=".MainActivity"
             ></activity>
     </application>

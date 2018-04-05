@@ -40,7 +40,7 @@ public class bashaAndolon extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sixty_four_zilla);
+        setContentView(R.layout.activity_basha_andolon);
 
 
 

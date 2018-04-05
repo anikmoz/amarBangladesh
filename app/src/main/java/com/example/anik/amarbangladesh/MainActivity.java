@@ -180,6 +180,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.muktizuddho) {
 
+            Intent muktiZuddhoCall = new Intent(MainActivity.this, muktiZuddho.class);
+            startActivity(muktiZuddhoCall);
+
         } else if (id == R.id.zila) {
             Intent allZilaInfo = new Intent(MainActivity.this, sixtyFourZilla.class);
             startActivity(allZilaInfo);
