@@ -1,6 +1,10 @@
 package com.example.anik.amarbangladesh;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +36,7 @@ public class sixtyFourZilla extends AppCompatActivity {
     final ArrayList<String> list = new ArrayList<String>();
     //final ArrayList<String> details = new ArrayList<String>();
     //final ArrayList<String> images = new ArrayList<String>();
-    final ArrayList<String> ids=new ArrayList<>();
+    final ArrayList<String> ids = new ArrayList<>();
 
 
     @Override
@@ -41,18 +45,31 @@ public class sixtyFourZilla extends AppCompatActivity {
         setContentView(R.layout.activity_sixty_four_zilla);
 
 
-
         requestQueue = Volley.newRequestQueue(this);
         //final TextView result = (TextView) findViewById(R.id.anik);
         listView = (ListView) findViewById(R.id.listView);
-        searchView= (SearchView) findViewById(R.id.serchViewMain);
+        searchView = (SearchView) findViewById(R.id.serchViewMain);
 
-        getData();
+        if (connectionCheck()) { // checking when connection is online
+            //Toast.makeText(bashaAndolon.this, "Connected", Toast.LENGTH_SHORT).show();
+            getData(); // After checking internet connection if connection is success i am calling data function
+        } else { // checking when connection is not online
+            //Toast.makeText(bashaAndolon.this, "Notconnected", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(sixtyFourZilla.this);
+            builder.setMessage("Make sure your Internet Connection is on !");
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 
 
+    private boolean connectionCheck() { // Thius function is for checking internet connection
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
 
-    private static final String country_list = "http://192.168.0.102/amarBangladesh/district.php";
+    private static final String country_list = "http://192.168.0.101/amarBangladesh/district.php";
 
     public void getData() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, country_list, null, new Response.Listener<JSONArray>() {
@@ -66,7 +83,7 @@ public class sixtyFourZilla extends AppCompatActivity {
                         String title = (String) jsonObject.get("name");
                         //String story = (String) jsonObject.get("story");
                         //String image = (String) jsonObject.get("image");
-                        String id=(String) jsonObject.get("id");
+                        String id = (String) jsonObject.get("id");
 
 
                         list.add(title);
@@ -110,13 +127,13 @@ public class sixtyFourZilla extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //String userdata = details.get(position);
                 //String userImage = images.get(position);
-                String contentId=ids.get(position);
+                String contentId = ids.get(position);
                 //Toast.makeText(MainActivity.this, contentId, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(sixtyFourZilla.this, details.class);
                 //intent.putExtra("data", userdata);
                 //intent.putExtra("images", userImage);
-                intent.putExtra("id",contentId);
+                intent.putExtra("id", contentId);
 
                 startActivity(intent);
             }

@@ -1,6 +1,10 @@
 package com.example.anik.amarbangladesh;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,15 +31,15 @@ import java.util.ArrayList;
 public class bashaAndolon extends AppCompatActivity {
 
 
-
     RequestQueue requestQueue;
     TextView textView;
     ListView listView;
     SearchView searchView;
+
     final ArrayList<String> list = new ArrayList<String>();
     //final ArrayList<String> details = new ArrayList<String>();
     //final ArrayList<String> images = new ArrayList<String>();
-    final ArrayList<String> ids=new ArrayList<>();
+    final ArrayList<String> ids = new ArrayList<>();
 
 
     @Override
@@ -43,18 +48,33 @@ public class bashaAndolon extends AppCompatActivity {
         setContentView(R.layout.activity_basha_andolon);
 
 
-
         requestQueue = Volley.newRequestQueue(this);
         //final TextView result = (TextView) findViewById(R.id.anik);
         listView = (ListView) findViewById(R.id.listView);
-        searchView= (SearchView) findViewById(R.id.serchViewMain);
+        searchView = (SearchView) findViewById(R.id.serchViewMain);
 
-        getData();
+
+
+        if (connectionCheck()) { // checking when connection is online
+            //Toast.makeText(bashaAndolon.this, "Connected", Toast.LENGTH_SHORT).show();
+            getData(); // After checking internet connection if connection is success i am calling data function
+        } else { // checking when connection is not online
+            //Toast.makeText(bashaAndolon.this, "Notconnected", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder=new AlertDialog.Builder(bashaAndolon.this);
+            builder.setMessage("Make sure your Internet Connection is on !");
+            AlertDialog alertDialog=builder.create();
+            alertDialog.show();
+        }
     }
 
 
+    private boolean connectionCheck() { // Thius function is for checking internet connection
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
 
-    private static final String country_list = "http://192.168.0.102/amarBangladesh/bashaAndolon.php";
+    private static final String country_list = "http://192.168.0.101/amarBangladesh/bashaAndolon.php";
 
     public void getData() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, country_list, null, new Response.Listener<JSONArray>() {
@@ -68,7 +88,7 @@ public class bashaAndolon extends AppCompatActivity {
                         String title = (String) jsonObject.get("name");
                         //String story = (String) jsonObject.get("story");
                         //String image = (String) jsonObject.get("image");
-                        String id=(String) jsonObject.get("id");
+                        String id = (String) jsonObject.get("id");
 
 
                         list.add(title);
@@ -85,14 +105,14 @@ public class bashaAndolon extends AppCompatActivity {
                     listView.setAdapter(adapter);
 
 
-                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {  // using this function serching data from list
                         @Override
                         public boolean onQueryTextSubmit(String query) {
                             return false;
-                        }
+                        } // if need to filter data by search submit
 
                         @Override
-                        public boolean onQueryTextChange(String newText) {
+                        public boolean onQueryTextChange(String newText) { // for filter result when data is changing
                             adapter.getFilter().filter(newText);
                             return false;
                         }
@@ -109,16 +129,16 @@ public class bashaAndolon extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { // goto data view using on click list item
                 //String userdata = details.get(position);
                 //String userImage = images.get(position);
-                String contentId=ids.get(position);
+                String contentId = ids.get(position);
                 //Toast.makeText(MainActivity.this, contentId, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(bashaAndolon.this, details.class);
                 //intent.putExtra("data", userdata);
                 //intent.putExtra("images", userImage);
-                intent.putExtra("id",contentId);
+                intent.putExtra("id", contentId);
 
                 startActivity(intent);
             }

@@ -197,6 +197,8 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(Intent.EXTRA_TEXT, body);
             startActivity(Intent.createChooser(intent, "Share with "));
         } else if (id == R.id.nav_send) {
+            Intent wellcome = new Intent(MainActivity.this, wellcome.class);
+            startActivity(wellcome);
 
         }
 

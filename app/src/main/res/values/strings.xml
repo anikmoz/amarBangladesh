@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">আমার বাংলাদেশ</string>
+    <string name="slogan">৩০ লক্ষ্য শহীদের রক্তের বিনিময়ে এই লাল সবুজের পতাকা আগে নিজেকে জানুন পরে অন্যদের </string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
