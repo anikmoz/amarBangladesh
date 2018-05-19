@@ -12,11 +12,11 @@
 
 
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:paddingTop="100px"
-        android:layout_height="match_parent"
-        android:listSelector="@color/colorPrimary"
-        />
+  <android.support.v7.widget.RecyclerView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/mainRecyclerViewId">
+
+  </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>

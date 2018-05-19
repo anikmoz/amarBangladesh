@@ -35,7 +35,7 @@ public class details extends AppCompatActivity {
     */
     ImageView imageView;
     AdView mAdView;
-    public static final String GETBYIDLINK = "http://192.168.0.101/amarBangladesh/get_by_id.php";
+    public static final String GETBYIDLINK = "http://learnfromgame.com/amarBangladesh/get_by_id.php";
     String gotId;
     RequestQueue requestQueue;
 

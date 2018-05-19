@@ -69,7 +69,7 @@ public class muktiZuddho extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private static final String country_list = "http://192.168.0.101/amarBangladesh/muktiZuddho.php";
+    private static final String country_list = "http://learnfromgame.com/amarBangladesh/muktiZuddho.php";
 
     public void getData() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, country_list, null, new Response.Listener<JSONArray>() {

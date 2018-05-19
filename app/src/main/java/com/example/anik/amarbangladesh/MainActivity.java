@@ -1,9 +1,12 @@
 package com.example.anik.amarbangladesh;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,23 +29,30 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anik.amarbangladesh.domain.Domain;
+import com.example.anik.amarbangladesh.domain.MyAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     RequestQueue requestQueue;
-    TextView textView;
-    ListView listView;
-    ImageView imageView;
-    final ArrayList<String> list = new ArrayList<String>();
-    final ArrayList<String> ids = new ArrayList<>();
+    //ListView listView;
+    //ImageView imageView;
+    //final ArrayList<String> list = new ArrayList<String>();
+    //final ArrayList<String> ids = new ArrayList<>();
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private List<Domain> domains;
 
 
     @Override
@@ -51,14 +61,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,62 +75,102 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-
         requestQueue = Volley.newRequestQueue(this);
-        listView = (ListView) findViewById(R.id.listView);
+        //listView = (ListView) findViewById(R.id.listView);
 
-//        getData();
+        recyclerView = (RecyclerView) findViewById(R.id.mainRecyclerViewId);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        domains = new ArrayList<>();
+        getData(); // After checking internet connection if connection is success i am calling data function
+
+
+       /* for (int i = 0; i <= 10; i++) {
+            Domain customDomain = new Domain(
+                    "id" + i + 1,
+                    "Alll details are here ",
+                    "Alll details are here ",
+                    "Alll details are here "
+            );
+            domains.add(customDomain);
+        }
+        adapter=new MyAdapter(domains,this);
+        recyclerView.setAdapter(adapter);*/
+
     }
 
+    private static final String newsList = "http://learnfromgame.com/amarBangladesh/news.php";
 
-   /* private static final String country_list = "http://192.168.0.101/amarBangladesh/district.php";
 
     public void getData() {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, country_list, null, new Response.Listener<JSONArray>() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading");
+        progressDialog.show();
+
+        /*StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                newsList,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonObject=new JSONObject(response);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });*/
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, newsList, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 System.out.println(response);
+
+                progressDialog.dismiss();
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = (JSONObject) response.get(i);
-                        String title = (String) jsonObject.get("name");
+                     /*   String title = (String) jsonObject.get("name");
                         String id = (String) jsonObject.get("id");
                         list.add(title);
                         ids.add(id);
+*/
 
+                        Domain data = new Domain(
+                                jsonObject.getString("id"),
+                                jsonObject.getString("name"),
+                                jsonObject.getString("story"),
+                                jsonObject.getString("image")
+
+                        );
+
+                        domains.add(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.array_view, R.id.textView1, list);
-                    listView.setAdapter(adapter);
-
                 }
+                adapter = new MyAdapter(domains, getApplicationContext());
+                recyclerView.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG);
             }
         });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String userdata = details.get(position);
-                //String userImage = images.get(position);
-                String contentId = ids.get(position);
-                //Toast.makeText(MainActivity.this, contentId, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(MainActivity.this, details.class);
-                //intent.putExtra("data", userdata);
-                //intent.putExtra("images", userImage);
-                intent.putExtra("id", contentId);
-
-                startActivity(intent);
-            }
-        });
-    }*/
+    }
 
 
     @Override
@@ -159,7 +201,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -188,7 +229,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(allZilaInfo);
 
         } else if (id == R.id.nav_share) {
-
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             String subject = "Amar Bangladesh";
@@ -199,7 +239,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             Intent wellcome = new Intent(MainActivity.this, wellcome.class);
             startActivity(wellcome);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

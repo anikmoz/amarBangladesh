@@ -69,7 +69,7 @@ public class sixtyFourZilla extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private static final String country_list = "http://192.168.0.101/amarBangladesh/district.php";
+    private static final String country_list = "http://learnfromgame.com/amarBangladesh/district.php";
 
     public void getData() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, country_list, null, new Response.Listener<JSONArray>() {
