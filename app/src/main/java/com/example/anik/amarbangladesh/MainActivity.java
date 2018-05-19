@@ -45,11 +45,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     RequestQueue requestQueue;
-    //ListView listView;
-    //ImageView imageView;
-    //final ArrayList<String> list = new ArrayList<String>();
-    //final ArrayList<String> ids = new ArrayList<>();
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Domain> domains;
@@ -76,7 +71,6 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         requestQueue = Volley.newRequestQueue(this);
-        //listView = (ListView) findViewById(R.id.listView);
 
         recyclerView = (RecyclerView) findViewById(R.id.mainRecyclerViewId);
         recyclerView.setHasFixedSize(true);
@@ -84,20 +78,6 @@ public class MainActivity extends AppCompatActivity
 
         domains = new ArrayList<>();
         getData(); // After checking internet connection if connection is success i am calling data function
-
-
-       /* for (int i = 0; i <= 10; i++) {
-            Domain customDomain = new Domain(
-                    "id" + i + 1,
-                    "Alll details are here ",
-                    "Alll details are here ",
-                    "Alll details are here "
-            );
-            domains.add(customDomain);
-        }
-        adapter=new MyAdapter(domains,this);
-        recyclerView.setAdapter(adapter);*/
-
     }
 
     private static final String newsList = "http://learnfromgame.com/amarBangladesh/news.php";
@@ -108,27 +88,6 @@ public class MainActivity extends AppCompatActivity
         progressDialog.setMessage("Loading");
         progressDialog.show();
 
-        /*StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                newsList,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            JSONObject jsonObject=new JSONObject(response);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });*/
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, newsList, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -138,20 +97,13 @@ public class MainActivity extends AppCompatActivity
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = (JSONObject) response.get(i);
-                     /*   String title = (String) jsonObject.get("name");
-                        String id = (String) jsonObject.get("id");
-                        list.add(title);
-                        ids.add(id);
-*/
-
                         Domain data = new Domain(
                                 jsonObject.getString("id"),
                                 jsonObject.getString("name"),
                                 jsonObject.getString("story"),
-                                jsonObject.getString("image")
-
+                                jsonObject.getString("image"),
+                                jsonObject.getString("publish_date")
                         );
-
                         domains.add(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -167,9 +119,11 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG);
             }
         });
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
+
+
+
     }
 
 
@@ -237,8 +191,8 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(Intent.EXTRA_TEXT, body);
             startActivity(Intent.createChooser(intent, "Share with "));
         } else if (id == R.id.nav_send) {
-            Intent wellcome = new Intent(MainActivity.this, wellcome.class);
-            startActivity(wellcome);
+            //Intent wellcome = new Intent(MainActivity.this, wellcome.class);
+           // startActivity(wellcome);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

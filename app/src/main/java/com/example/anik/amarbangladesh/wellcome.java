@@ -10,24 +10,6 @@ package com.example.anik.amarbangladesh;
         import android.widget.TextView;
 
 public class wellcome extends AppCompatActivity {
-
-//    private static int SPLASH_TIME_OUT = 4000;
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wellcome);
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.hide();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent wellcomeIntent = new Intent(wellcome.this, MainActivity.class);
-                startActivity(wellcomeIntent);
-                finish();
-            }
-        },SPLASH_TIME_OUT);
-    }*/
-
     private int SLEEP_TIMER = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +23,7 @@ public class wellcome extends AppCompatActivity {
         getSupportActionBar().hide();
         LogoLauncher logoLauncher = new LogoLauncher();
         logoLauncher.start();
-
     }
-
     private class LogoLauncher extends Thread{
         public void run(){
             try{
@@ -57,6 +37,4 @@ public class wellcome extends AppCompatActivity {
             wellcome.this.finish();
         }
     }
-
-
 }

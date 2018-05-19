@@ -1,5 +1,6 @@
 package com.example.anik.amarbangladesh;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -51,7 +52,6 @@ public class details extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-
         MobileAds.initialize(this, " ca-app-pub-8724215326824300~2768235041");
         requestQueue = Volley.newRequestQueue(this);
         mAdView = (AdView) findViewById(R.id.adView);
@@ -67,6 +67,10 @@ public class details extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading");
+            progressDialog.show();
             //String value = bundle.getString("data");
             //String userImage = bundle.getString("images");
             //textView.setText(Html.fromHtml(value));
@@ -85,6 +89,8 @@ public class details extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     System.out.println(response);
+                    progressDialog.dismiss();
+
 //                    home task tor json string theke parse kore kivabe
                     JSONArray jsonArray = null;
                     try {
@@ -109,14 +115,13 @@ public class details extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    progressDialog.dismiss();
+
                 }
-            })
-            {
+            }) {
                 @Override
                 protected Map<String, String> getParams() {
                   /*  System.out.println("got id in get parrams");
-                    System.out.println("got id in get parrams");
-                    System.out.println("got id in get parrams");
                     System.out.println("got id in get parrams");
                     System.out.println(gotId);
                     System.out.println(gotId);

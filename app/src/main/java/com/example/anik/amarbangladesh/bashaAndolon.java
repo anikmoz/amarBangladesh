@@ -1,5 +1,6 @@
 package com.example.anik.amarbangladesh;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -37,8 +38,6 @@ public class bashaAndolon extends AppCompatActivity {
     SearchView searchView;
 
     final ArrayList<String> list = new ArrayList<String>();
-    //final ArrayList<String> details = new ArrayList<String>();
-    //final ArrayList<String> images = new ArrayList<String>();
     final ArrayList<String> ids = new ArrayList<>();
 
 
@@ -54,15 +53,14 @@ public class bashaAndolon extends AppCompatActivity {
         searchView = (SearchView) findViewById(R.id.serchViewMain);
 
 
-
         if (connectionCheck()) { // checking when connection is online
             //Toast.makeText(bashaAndolon.this, "Connected", Toast.LENGTH_SHORT).show();
             getData(); // After checking internet connection if connection is success i am calling data function
         } else { // checking when connection is not online
             //Toast.makeText(bashaAndolon.this, "Notconnected", Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder=new AlertDialog.Builder(bashaAndolon.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(bashaAndolon.this);
             builder.setMessage("Make sure your Internet Connection is on !");
-            AlertDialog alertDialog=builder.create();
+            AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
     }
@@ -77,10 +75,16 @@ public class bashaAndolon extends AppCompatActivity {
     private static final String country_list = "http://learnfromgame.com/amarBangladesh/bashaAndolon.php";
 
     public void getData() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading");
+        progressDialog.show();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, country_list, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 System.out.println(response);
+                progressDialog.dismiss();
+
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = (JSONObject) response.get(i);
@@ -89,8 +93,6 @@ public class bashaAndolon extends AppCompatActivity {
                         //String story = (String) jsonObject.get("story");
                         //String image = (String) jsonObject.get("image");
                         String id = (String) jsonObject.get("id");
-
-
                         list.add(title);
                         //details.add(story);
                         //images.add(image);
@@ -122,6 +124,7 @@ public class bashaAndolon extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
             }
         });
         requestQueue.add(jsonArrayRequest);

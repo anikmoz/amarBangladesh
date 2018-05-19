@@ -10,12 +10,14 @@ public class Domain {
     private String name;
     private String story;
     private String image;
+    private String publishDate;
 
-    public Domain(String id, String name, String story, String image) {
+    public Domain(String id, String name, String story, String image, String publishDate) {
         this.id = id;
         this.name = name;
         this.story = story;
         this.image = image;
+        this.publishDate = publishDate;
     }
 
     public String getId() {
@@ -32,5 +34,9 @@ public class Domain {
 
     public String getImage() {
         return image;
+    }
+
+    public String getPublishDate() {
+        return publishDate;
     }
 }
