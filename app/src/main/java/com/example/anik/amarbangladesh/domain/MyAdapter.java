@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anik.amarbangladesh.MainActivity;
 import com.example.anik.amarbangladesh.R;
 import com.example.anik.amarbangladesh.bashaAndolon;
 import com.example.anik.amarbangladesh.details;
@@ -44,18 +45,33 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Domain domain=listData.get(position);
+        final Domain domain = listData.get(position);
 
         //holder.id.setText(domain.getId());
         holder.name.setText(domain.getName());
         holder.publishDate.setText(domain.getPublishDate());
-
         String image = (String) domain.getImage();
+        if(image != null) {
+            byte[] data = Base64.decode(image, Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            holder.imazeView.setImageBitmap(bmp);
+        }
 
+        holder.cardViewId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Domain domain = listData.get(position);
 
-        byte[] data = Base64.decode(image, Base64.DEFAULT);
-        Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-        holder.imazeView.setImageBitmap(bmp);
+                String contentId = domain.getId();
+                System.out.println(contentId);
+
+                Intent intent = new Intent(context, details.class);
+                intent.putExtra("id", contentId);
+                System.out.println(intent);
+                context.startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -70,16 +86,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public ImageView imazeView;
         public TextView name;
         public TextView publishDate;
-        public LinearLayout linearLayout;
+        public LinearLayout cardViewId;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-           // id = (TextView) itemView.findViewById(R.id.textIdOne);
+            // id = (TextView) itemView.findViewById(R.id.textIdOne);
             imazeView = (ImageView) itemView.findViewById(R.id.imageViewMain);
             name = (TextView) itemView.findViewById(R.id.textDetails);
             publishDate = (TextView) itemView.findViewById(R.id.publishDate);
-            linearLayout=(LinearLayout)itemView.findViewById(R.id.cardViewId);
+            cardViewId = (LinearLayout) itemView.findViewById(R.id.cardViewId);
         }
     }
 }

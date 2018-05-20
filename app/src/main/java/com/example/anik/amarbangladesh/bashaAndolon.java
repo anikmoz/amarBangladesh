@@ -142,7 +142,6 @@ public class bashaAndolon extends AppCompatActivity {
                 //intent.putExtra("data", userdata);
                 //intent.putExtra("images", userImage);
                 intent.putExtra("id", contentId);
-
                 startActivity(intent);
             }
         });
