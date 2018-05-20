@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ffffff"
+    android:background="#a1d6d6d6"
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
@@ -15,37 +15,48 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="20px"
+        android:padding="10dp"
+
         >
 
         <ImageView
+            android:background="#ffffff"
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="400px"
             android:scaleType="centerInside"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:layout_gravity="center"
-            />
-
-        <TextView
-            android:id="@+id/detailsView"
-            android:layout_width="wrap_content"
-            android:padding="10px"
-            android:layout_height="match_parent"
-            android:textSize="30px"
-            android:textAlignment="gravity"
-            android:textColor="#000"
+            android:src="@mipmap/ic_launcher"
 
             />
-
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
             ads:adUnitId="ca-app-pub-8724215326824300/7870240683"></com.google.android.gms.ads.AdView>
+        <TextView
+            android:id="@+id/detailsView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="30px"
+            android:textColor="#000"
+            android:background="#ffffff"
+            android:text="Anik Mazumder"
+            android:scaleType="centerInside"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="10px"
+
+
+            />
+
+
 
     </LinearLayout>
 

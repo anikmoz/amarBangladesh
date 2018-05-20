@@ -5,11 +5,14 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/home"
-            android:title="হোম" />
+            android:title="হোম"
+
+            />
         <item
             android:id="@+id/bashaandolon"
             android:icon="@drawable/home"
-            android:title="ভাষা আন্দোলন " />
+            android:title="ভাষা আন্দোলন "
+            />
         <item
             android:id="@+id/muktizuddho"
             android:icon="@drawable/home"
