@@ -6,16 +6,15 @@
             android:id="@+id/home"
             android:icon="@drawable/home"
             android:title="হোম"
-
             />
         <item
             android:id="@+id/bashaandolon"
-            android:icon="@drawable/home"
+            android:icon="@mipmap/february"
             android:title="ভাষা আন্দোলন "
             />
         <item
             android:id="@+id/muktizuddho"
-            android:icon="@drawable/home"
+            android:icon="@mipmap/muktizuddho"
             android:title="মুক্তিযুদ্ধ" />
 
         <item
@@ -37,4 +36,4 @@
         </menu>
     </item>
 
-</menu>
+</menu >
