@@ -30,6 +30,7 @@ import java.util.Map;
 public class details extends AppCompatActivity {
 
 
+    TextView titleText;
     TextView textView;
     /*
         ScrollView scrollView;
@@ -61,6 +62,7 @@ public class details extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.detailsView);
         imageView = (ImageView) findViewById(R.id.imageView);
+        titleText=(TextView) findViewById(R.id.titleTextView);
 /*
         scrollView = (ScrollView) findViewById(R.id.detailsScroll);
 */
@@ -97,12 +99,14 @@ public class details extends AppCompatActivity {
                         jsonArray = new JSONArray(response);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                            String title = (String) jsonObject.get("name");
                             String story = (String) jsonObject.get("story");
                             String image = (String) jsonObject.get("image");
                             //Toast.makeText(details.this, image, Toast.LENGTH_SHORT).show();
 
                             byte[] data = Base64.decode(image, Base64.DEFAULT);
                             Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                            titleText.setText(title);
                             imageView.setImageBitmap(bmp);
                             //Log.e("app", "status" );
                             //System.out.println(story);
