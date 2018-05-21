@@ -9,6 +9,7 @@ import android.text.Html;
 import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anik.amarbangladesh.ads.InterstitialAds;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -51,23 +53,28 @@ public class details extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-
-        MobileAds.initialize(this, " ca-app-pub-8724215326824300~2768235041");
         requestQueue = Volley.newRequestQueue(this);
+
+
+      /*  MobileAds.initialize(this, " ca-app-pub-8724215326824300~2768235041");
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
 
         textView = (TextView) findViewById(R.id.detailsView);
         imageView = (ImageView) findViewById(R.id.imageView);
         titleText=(TextView) findViewById(R.id.titleTextView);
+
+        InterstitialAds customAds = new InterstitialAds();
+        customAds.adLoad(getApplicationContext(),getString(R.string.interstial_ad_unit));
 /*
         scrollView = (ScrollView) findViewById(R.id.detailsScroll);
 */
 
         Bundle bundle = getIntent().getExtras();
+        System.out.println(bundle);
+
         if (bundle != null) {
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -84,7 +91,9 @@ public class details extends AppCompatActivity {
 
             gotId = (String) bundle.getString("id");
             int convertid = Integer.parseInt(gotId);
-            //Toast.makeText(details.this, gotId + convertid, Toast.LENGTH_SHORT).show();
+            Toast.makeText(details.this, gotId + convertid, Toast.LENGTH_SHORT).show();
+            System.out.println(gotId);
+
             //textView.setText(gotId + convertid);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, GETBYIDLINK, new Response.Listener<String>() {

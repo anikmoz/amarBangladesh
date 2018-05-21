@@ -49,14 +49,14 @@
             android:src="@mipmap/ic_launcher"
 
             />
-        <com.google.android.gms.ads.AdView
+        <!--<com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-8724215326824300/7870240683"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="ca-app-pub-8724215326824300/2229840692"></com.google.android.gms.ads.AdView>-->
         <TextView
             android:id="@+id/detailsView"
             android:layout_width="wrap_content"
@@ -70,7 +70,6 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginTop="10px"
-
 
             />
 

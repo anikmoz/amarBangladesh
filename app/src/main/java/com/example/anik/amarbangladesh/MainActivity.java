@@ -78,9 +78,11 @@ public class MainActivity extends AppCompatActivity
 
         domains = new ArrayList<>();
         getData(); // After checking internet connection if connection is success i am calling data function
+
     }
 
     private static final String newsList = "http://learnfromgame.com/amarBangladesh/news.php";
+
 
 
     public void getData() {
@@ -122,9 +124,9 @@ public class MainActivity extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
 
-
-
     }
+
+
 
 
     @Override

@@ -29,6 +29,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<Domain> listData;
     private Context context;
+    String contentId;
 
     public MyAdapter(List<Domain> listData, Context context) {
         this.listData = listData;
@@ -62,12 +63,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View view) {
                 final Domain domain = listData.get(position);
 
-                String contentId = domain.getId();
+                 contentId = domain.getId();
                 System.out.println(contentId);
 
                 Intent intent = new Intent(context, details.class);
-                intent.putExtra("id", contentId);
-                System.out.println(intent);
+                intent.putExtra("id",contentId);
                 context.startActivity(intent);
 
             }
