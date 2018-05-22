@@ -1,6 +1,10 @@
 package com.example.anik.amarbangladesh;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,8 +41,6 @@ public class News extends AppCompatActivity {
         setContentView(R.layout.activity_news);
 
 
-
-
         requestQueue = Volley.newRequestQueue(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.mainRecyclerViewId);
@@ -46,16 +48,29 @@ public class News extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         domains = new ArrayList<>();
-        getData(); // After checking internet connection if connection is success i am calling data function
+
+        if (connectionCheck()) { // checking when connection is online
+            //Toast.makeText(bashaAndolon.this, "Connected", Toast.LENGTH_SHORT).show();
+            getData(); // After checking internet connection if connection is success i am calling data function
+        } else { // checking when connection is not online
+            //Toast.makeText(bashaAndolon.this, "Notconnected", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(News.this);
+            builder.setMessage("Make sure your Internet Connection is on !");
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+
+
+    }
+
+    private boolean connectionCheck() { // Thius function is for checking internet connection
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 
 
-
-
-
-
     private static final String newsList = "http://learnfromgame.com/amarBangladesh/news.php";
-
 
 
     public void getData() {

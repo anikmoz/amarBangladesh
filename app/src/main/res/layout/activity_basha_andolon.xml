@@ -8,12 +8,11 @@
     tools:context="com.example.anik.amarbangladesh.bashaAndolon">
 
 
-
     <SearchView
         android:id="@+id/serchViewMain"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:queryHint="জেলা নাম লিখুন"
+        android:queryHint="অনুসন্ধান করুন"
 
         >
 
@@ -23,7 +22,6 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:listSelector="@color/colorPrimary"
-        />
+        android:listSelector="@color/colorPrimary" />
 
 </LinearLayout>

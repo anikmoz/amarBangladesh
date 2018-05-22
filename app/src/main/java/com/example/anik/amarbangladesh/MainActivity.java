@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +68,24 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-
     }
 
 
+    public void gotToKhobor(View view) {
+        startActivity(new Intent(MainActivity.this, News.class));
+    }
 
+    public void gotToBashaAndolon(View view) {
+        startActivity(new Intent(MainActivity.this, bashaAndolon.class));
+    }
+
+    public void gotToMuktizuddho(View view) {
+        startActivity(new Intent(MainActivity.this, muktiZuddho.class));
+    }
+
+    public void gotToAllZilla(View view) {
+        startActivity(new Intent(MainActivity.this, sixtyFourZilla.class));
+    }
 
 
     @Override
@@ -121,7 +134,7 @@ public class MainActivity extends AppCompatActivity
             Intent bashaAndolonCall = new Intent(MainActivity.this, bashaAndolon.class);
             startActivity(bashaAndolonCall);
 
-        }else if (id == R.id.news) {
+        } else if (id == R.id.news) {
             Intent news = new Intent(MainActivity.this, News.class);
             startActivity(news);
 
@@ -144,7 +157,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(Intent.createChooser(intent, "Share with "));
         } else if (id == R.id.nav_send) {
             //Intent wellcome = new Intent(MainActivity.this, wellcome.class);
-           // startActivity(wellcome);
+            // startActivity(wellcome);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

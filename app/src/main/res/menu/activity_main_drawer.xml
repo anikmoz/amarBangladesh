@@ -10,7 +10,7 @@
         <item
             android:id="@+id/news"
             android:icon="@mipmap/february"
-            android:title="News"
+            android:title="খবর"
             /> <item
             android:id="@+id/bashaandolon"
             android:icon="@mipmap/february"
