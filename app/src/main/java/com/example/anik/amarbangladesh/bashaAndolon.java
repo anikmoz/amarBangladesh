@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
 
 public class bashaAndolon extends AppCompatActivity {
 
@@ -107,18 +109,20 @@ public class bashaAndolon extends AppCompatActivity {
                     listView.setAdapter(adapter);
 
 
-                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {  // using this function serching data from list
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            return false;
-                        } // if need to filter data by search submit
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {  // using this function serching data from list
+                            @Override
+                            public boolean onQueryTextSubmit(String query) {
+                                return false;
+                            } // if need to filter data by search submit
 
-                        @Override
-                        public boolean onQueryTextChange(String newText) { // for filter result when data is changing
-                            adapter.getFilter().filter(newText);
-                            return false;
-                        }
-                    });
+                            @Override
+                            public boolean onQueryTextChange(String newText) { // for filter result when data is changing
+                                adapter.getFilter().filter(newText);
+                                return false;
+                            }
+                        });
+                    }
                 }
             }
         }, new Response.ErrorListener() {

@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+//import com.example.anik.amarbangladesh.ads.InterstitialAds;
 import com.example.anik.amarbangladesh.ads.InterstitialAds;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -56,10 +57,10 @@ public class details extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
 
-      /*  MobileAds.initialize(this, " ca-app-pub-8724215326824300~2768235041");
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        mAdView.loadAd(adRequest);*/
+//        MobileAds.initialize(this, " ca-app-pub-8724215326824300~2768235041");
+//        mAdView = (AdView) findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+//        mAdView.loadAd(adRequest);
 
 
         textView = (TextView) findViewById(R.id.detailsView);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -88,18 +89,20 @@ public class sixtyFourZilla extends AppCompatActivity {
                     }
                     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(sixtyFourZilla.this, R.layout.array_view, R.id.textView1, list);
                     listView.setAdapter(adapter);
-                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            return false;
-                        }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String query) {
+                                return false;
+                            }
 
-                        @Override
-                        public boolean onQueryTextChange(String newText) {
-                            adapter.getFilter().filter(newText);
-                            return false;
-                        }
-                    });
+                            @Override
+                            public boolean onQueryTextChange(String newText) {
+                                adapter.getFilter().filter(newText);
+                                return false;
+                            }
+                        });
+                    }
                 }
             }
         }, new Response.ErrorListener() {

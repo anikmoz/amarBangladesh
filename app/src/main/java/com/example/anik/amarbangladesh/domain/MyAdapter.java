@@ -63,12 +63,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View view) {
                 final Domain domain = listData.get(position);
 
-                 contentId = domain.getId();
+                contentId = domain.getId();
                 System.out.println(contentId);
 
                 Intent intent = new Intent(context, details.class);
                 intent.putExtra("id",contentId);
+                //TODO Just need to add this line to avoid error :)
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+
 
             }
         });
