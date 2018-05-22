@@ -8,6 +8,10 @@
             android:title="হোম"
             />
         <item
+            android:id="@+id/news"
+            android:icon="@mipmap/february"
+            android:title="News"
+            /> <item
             android:id="@+id/bashaandolon"
             android:icon="@mipmap/february"
             android:title="ভাষা আন্দোলন "

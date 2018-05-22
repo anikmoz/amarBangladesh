@@ -45,10 +45,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    RequestQueue requestQueue;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private List<Domain> domains;
 
 
     @Override
@@ -71,61 +67,10 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        requestQueue = Volley.newRequestQueue(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.mainRecyclerViewId);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        domains = new ArrayList<>();
-        getData(); // After checking internet connection if connection is success i am calling data function
 
     }
 
-    private static final String newsList = "http://learnfromgame.com/amarBangladesh/news.php";
-
-
-
-    public void getData() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading");
-        progressDialog.show();
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, newsList, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                System.out.println(response);
-
-                progressDialog.dismiss();
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = (JSONObject) response.get(i);
-                        Domain data = new Domain(
-                                jsonObject.getString("id"),
-                                jsonObject.getString("name"),
-                                jsonObject.getString("story"),
-                                jsonObject.getString("image"),
-                                jsonObject.getString("publish_date")
-                        );
-                        domains.add(data);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                adapter = new MyAdapter(domains, getApplicationContext());
-                recyclerView.setAdapter(adapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG);
-            }
-        });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonArrayRequest);
-
-    }
 
 
 
@@ -175,6 +120,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.bashaandolon) {
             Intent bashaAndolonCall = new Intent(MainActivity.this, bashaAndolon.class);
             startActivity(bashaAndolonCall);
+
+        }else if (id == R.id.news) {
+            Intent news = new Intent(MainActivity.this, News.class);
+            startActivity(news);
 
         } else if (id == R.id.muktizuddho) {
 

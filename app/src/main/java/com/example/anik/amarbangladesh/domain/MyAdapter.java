@@ -64,7 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 final Domain domain = listData.get(position);
 
                 contentId = domain.getId();
-                System.out.println(contentId);
+                //System.out.println(contentId);
 
                 Intent intent = new Intent(context, details.class);
                 intent.putExtra("id",contentId);

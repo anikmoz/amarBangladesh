@@ -92,8 +92,8 @@ public class details extends AppCompatActivity {
 
             gotId = (String) bundle.getString("id");
             int convertid = Integer.parseInt(gotId);
-            Toast.makeText(details.this, gotId + convertid, Toast.LENGTH_SHORT).show();
-            System.out.println(gotId);
+            //Toast.makeText(details.this, gotId + convertid, Toast.LENGTH_SHORT).show();
+            //System.out.println(gotId);
 
             //textView.setText(gotId + convertid);
 
