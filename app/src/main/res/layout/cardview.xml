@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardViewId"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -13,38 +13,24 @@
         android:layout_width="200px"
         android:layout_height="200px"
         android:src="@mipmap/ic_launcher"
-
         ></ImageView>
-
-    <!-- <TextView
-         android:id="@+id/textIdOne"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_gravity="center"
-         android:layout_weight="1"
-         android:text="Anik"
-
-         ></TextView>-->
 
     <TextView
         android:id="@+id/textDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
         android:paddingLeft="10px"
+        android:textColor="@color/black"
         android:text="আমার বাংলাদেশ"
-
-        ></TextView>
+        android:layout_toEndOf="@+id/imageViewMain"></TextView>
 
     <TextView
         android:id="@+id/publishDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
         android:paddingLeft="10px"
         android:text="0000-00-00"
-
-        ></TextView>
-</LinearLayout>
+        android:layout_below="@+id/textDetails"
+        android:layout_toEndOf="@+id/imageViewMain"
+        android:layout_marginTop="10dp"></TextView>
+</RelativeLayout>

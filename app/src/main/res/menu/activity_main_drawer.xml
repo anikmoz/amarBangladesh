@@ -4,26 +4,26 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
-            android:icon="@drawable/home"
+            android:icon="@drawable/ic_home_black_24dp"
             android:title="হোম"
             />
         <item
             android:id="@+id/news"
-            android:icon="@mipmap/newsphoto"
+            android:icon="@drawable/news"
             android:title="খবর"
             /> <item
             android:id="@+id/bashaandolon"
-            android:icon="@mipmap/february"
+            android:icon="@drawable/mainicon"
             android:title="ভাষা আন্দোলন "
             />
         <item
             android:id="@+id/muktizuddho"
-            android:icon="@mipmap/muktizuddho"
+            android:icon="@drawable/mainicon"
             android:title="মুক্তিযুদ্ধ" />
 
         <item
             android:id="@+id/zila"
-            android:icon="@drawable/home"
+            android:icon="@drawable/mainicon"
             android:title="৬৪ জিলা" />
     </group>
 

@@ -19,14 +19,14 @@
         <android.support.v7.widget.CardView
             android:layout_width="160dp"
             android:layout_height="190dp"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:onClick="gotToKhobor">
 
             <LinearLayout
                 android:id="@+id/homeKhoborId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:onClick="gotToKhobor"
                 android:orientation="vertical">
 
                 <ImageView
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="খবর"
-                    android:textSize="20dp"
+                    android:textSize="23dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -48,14 +48,15 @@
         <android.support.v7.widget.CardView
             android:layout_width="160dp"
             android:layout_height="190dp"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+
+            android:onClick="gotToBashaAndolon">
 
             <LinearLayout
                 android:id="@+id/homeBashaAndolonId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:onClick="gotToBashaAndolon"
                 android:orientation="vertical">
 
                 <ImageView
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="ভাষা আন্দোলন"
-                    android:textSize="20dp"
+                    android:textSize="23dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -85,14 +86,15 @@
         <android.support.v7.widget.CardView
             android:layout_width="160dp"
             android:layout_height="190dp"
-            android:layout_margin="10dp">
+
+            android:layout_margin="10dp"
+            android:onClick="gotToMuktizuddho">
 
             <LinearLayout
                 android:id="@+id/homemuktizuddhoId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:onClick="gotToMuktizuddho"
                 android:orientation="vertical">
 
                 <ImageView
@@ -106,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="মুক্তিযুদ্ধ"
-                    android:textSize="20dp"
+                    android:textSize="23dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -114,14 +116,15 @@
         <android.support.v7.widget.CardView
             android:layout_width="160dp"
             android:layout_height="190dp"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+
+            android:onClick="gotToAllZilla">
 
             <LinearLayout
                 android:id="@+id/homezillaId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:onClick="gotToAllZilla"
                 android:orientation="vertical">
 
                 <ImageView
@@ -134,8 +137,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="৬৪ জিলা"
-                    android:textSize="20dp"
+                    android:text="৬৪ জেলা"
+                    android:textSize="23dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </android.support.v7.widget.CardView>

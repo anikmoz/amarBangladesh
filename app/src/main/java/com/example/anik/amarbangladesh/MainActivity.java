@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //Toast.makeText(MainActivity.this, "Anikkkk", Toast.LENGTH_SHORT).show();
+            System.exit(0);   // when select exit application will closed
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             String subject = "Amar Bangladesh";
-            String body = "Download Amar Bangladesh App and Enjoy \n com.example.anik.amarbangladesh";
+            String body = "Download Amar Bangladesh App and Enjoy \n com.learnFromGame.anik.amarbangladesh";
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
             intent.putExtra(Intent.EXTRA_TEXT, body);
             startActivity(Intent.createChooser(intent, "Share with "));

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,7 +90,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public ImageView imazeView;
         public TextView name;
         public TextView publishDate;
-        public LinearLayout cardViewId;
+        public RelativeLayout cardViewId;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -98,7 +99,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             imazeView = (ImageView) itemView.findViewById(R.id.imageViewMain);
             name = (TextView) itemView.findViewById(R.id.textDetails);
             publishDate = (TextView) itemView.findViewById(R.id.publishDate);
-            cardViewId = (LinearLayout) itemView.findViewById(R.id.cardViewId);
+            cardViewId = (RelativeLayout) itemView.findViewById(R.id.cardViewId);
         }
     }
 }
