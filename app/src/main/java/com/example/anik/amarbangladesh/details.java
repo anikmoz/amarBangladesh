@@ -3,6 +3,7 @@ package com.example.anik.amarbangladesh;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -56,7 +57,6 @@ public class details extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         requestQueue = Volley.newRequestQueue(this);
 
-
 //        MobileAds.initialize(this, " ca-app-pub-8724215326824300~2768235041");
 //        mAdView = (AdView) findViewById(R.id.adView);
 //        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
@@ -65,10 +65,9 @@ public class details extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.detailsView);
         imageView = (ImageView) findViewById(R.id.imageView);
-        titleText=(TextView) findViewById(R.id.titleTextView);
+        titleText = (TextView) findViewById(R.id.titleTextView);
 
-        InterstitialAds customAds = new InterstitialAds();
-        customAds.adLoad(getApplicationContext(),getString(R.string.interstial_ad_unit));
+
 /*
         scrollView = (ScrollView) findViewById(R.id.detailsScroll);
 */
@@ -147,5 +146,8 @@ public class details extends AppCompatActivity {
             };
             requestQueue.add(stringRequest); //run
         }
+
     }
+
+
 }

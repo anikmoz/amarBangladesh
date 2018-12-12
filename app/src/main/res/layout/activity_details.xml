@@ -3,7 +3,7 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#a1d6d6d6"
+    android:background="#ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -24,7 +24,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:background="#ffffff"
+            android:background="@drawable/border"
             android:gravity="center"
             android:scaleType="centerInside"
             android:text="আমার বাংলাদেশ"
@@ -38,23 +38,24 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="fill_parent"
-            android:layout_height="400px"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:background="#ffffff"
             android:gravity="center"
             android:scaleType="centerInside"
             android:src="@mipmap/ic_launcher"
+            android:background="@drawable/border"
+
 
             />
-        <!--<com.google.android.gms.ads.AdView
+        <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-8724215326824300/2229840692"></com.google.android.gms.ads.AdView>-->
+            ads:adUnitId="ca-app-pub-8724215326824300/2229840692"></com.google.android.gms.ads.AdView>
         <TextView
             android:id="@+id/detailsView"
             android:layout_width="wrap_content"
@@ -62,7 +63,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:layout_marginTop="10px"
-            android:background="#ffffff"
+            android:background="@drawable/border"
             android:gravity="center"
             android:scaleType="centerInside"
             android:text="আমার বাংলাদেশ"

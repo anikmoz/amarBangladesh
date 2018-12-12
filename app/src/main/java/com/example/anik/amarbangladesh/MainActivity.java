@@ -1,8 +1,11 @@
 package com.example.anik.amarbangladesh;
 
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,8 +35,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anik.amarbangladesh.ads.InterstitialAds;
 import com.example.anik.amarbangladesh.domain.Domain;
 import com.example.anik.amarbangladesh.domain.MyAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.kobakei.ratethisapp.RateThisApp;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +54,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RewardedVideoAdListener {
 
 
     @Override
@@ -67,6 +77,36 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
+        getData();
+
+
+        RateThisApp.onCreate(this);
+        // If the condition is satisfied, "Rate this app" dialog will be shown
+        RateThisApp.Config config = new RateThisApp.Config(2, 4);
+        RateThisApp.init(config);
+        RateThisApp.setCallback(new RateThisApp.Callback() {
+            @Override
+            public void onYesClicked() {
+                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName());
+                Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                try {
+                    startActivity(myAppLinkToMarket);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(MainActivity.this, " unable to find market app", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onNoClicked() {
+                Toast.makeText(MainActivity.this, "No event", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelClicked() {
+                Toast.makeText(MainActivity.this, "Cancel event", Toast.LENGTH_SHORT).show();
+            }
+        });
+        RateThisApp.showRateDialogIfNeeded(this);
 
     }
 
@@ -153,17 +193,109 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             String subject = "Amar Bangladesh";
-            String body = "Download Amar Bangladesh App and Enjoy \n com.learnFromGame.anik.amarbangladesh";
+            String body = "Download Amar Bangladesh App and Enjoy \n https://play.google.com/store/apps/details?id=com.learnFromGame.anik.amarbangladesh";
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
             intent.putExtra(Intent.EXTRA_TEXT, body);
             startActivity(Intent.createChooser(intent, "Share with "));
         } else if (id == R.id.nav_send) {
-            //Intent wellcome = new Intent(MainActivity.this, wellcome.class);
-            // startActivity(wellcome);
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName());
+            Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                startActivity(myAppLinkToMarket);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(MainActivity.this, " unable to find market app", Toast.LENGTH_LONG).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
+
     }
+
+
+    private RewardedVideoAd mRewardedVideoAd;
+
+
+    public void getData() {
+        Handler myHandler = new Handler();
+        myHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rewardAds();
+            }
+        }, 35000);  //the time is in miliseconds
+    }
+
+
+    private void rewardAds() {
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        loadRewardedVideoAd();
+    }
+
+    private void loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd("ca-app-pub-8724215326824300/2229840692",//use this id for testing
+                new AdRequest.Builder().build());
+
+    }
+
+
+    @Override
+    public void onRewarded(RewardItem reward) {
+        //Toast.makeText(this, "Download to Earn" + reward.getType() + "  amount: " +
+        //reward.getAmount(), Toast.LENGTH_SHORT).show();
+
+        // Reward the user.
+    }
+
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+        Toast.makeText(this, "onRewardedVideoAdLeftApplication",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+//        Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
+        getData();
+    }
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int errorCode) {
+//        Toast.makeText(this, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();
+        getData();
+    }
+
+    @Override
+    public void onRewardedVideoAdLoaded() {
+//        Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
+        if (mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.show();
+        }
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
+//        Toast.makeText(this, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoStarted() {
+//        Toast.makeText(this, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
+    }
+
+
+  /*  public void getData() {
+        Handler myHandler = new Handler();
+        myHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InterstitialAds customAds = new InterstitialAds();
+                customAds.adLoad(getApplicationContext(), getString(R.string.interstial_ad_unit));
+                getData();
+            }
+        }, 20000);  //the time is in miliseconds
+    }*/
 }

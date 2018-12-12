@@ -59,8 +59,6 @@ public class News extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
-
-
     }
 
     private boolean connectionCheck() { // Thius function is for checking internet connection
@@ -82,7 +80,6 @@ public class News extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 System.out.println(response);
-
                 progressDialog.dismiss();
                 for (int i = 0; i < response.length(); i++) {
                     try {

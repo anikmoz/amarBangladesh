@@ -4,8 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:background="#ffffff"
+    android:background="@drawable/border"
     android:orientation="horizontal"
+
     android:padding="8px">
 
     <ImageView
