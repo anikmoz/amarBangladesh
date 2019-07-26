@@ -68,7 +68,7 @@ public class muktiZuddho extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private static final String country_list = "http://learnfromgame.com/amarBangladesh/muktiZuddho.php";
+    private static final String country_list = "http://anik.info/amarBangladesh/muktiZuddho.php";
 
     public void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);

@@ -41,7 +41,7 @@ public class details extends AppCompatActivity {
     */
     ImageView imageView;
     AdView mAdView;
-    public static final String GETBYIDLINK = "http://learnfromgame.com/amarBangladesh/get_by_id.php";
+    public static final String GETBYIDLINK = "http://anik.info/amarBangladesh/get_by_id.php";
     String gotId;
     RequestQueue requestQueue;
 
@@ -62,6 +62,10 @@ public class details extends AppCompatActivity {
 //        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
 //        mAdView.loadAd(adRequest);
 
+
+       /* InterstitialAds customAds = new InterstitialAds();
+        customAds.adLoad(getApplicationContext(),getString(R.string.interstial_ad_unit));*/
+/*
 
         textView = (TextView) findViewById(R.id.detailsView);
         imageView = (ImageView) findViewById(R.id.imageView);

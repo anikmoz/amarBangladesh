@@ -65,7 +65,7 @@ public class sixtyFourZilla extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private static final String country_list = "http://learnfromgame.com/amarBangladesh/district.php";
+    private static final String country_list = "http://anik.info/amarBangladesh/district.php";
 
     public void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);

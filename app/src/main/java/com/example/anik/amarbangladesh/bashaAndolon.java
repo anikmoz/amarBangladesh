@@ -74,7 +74,7 @@ public class bashaAndolon extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private static final String country_list = "http://learnfromgame.com/amarBangladesh/bashaAndolon.php";
+    private static final String country_list = "http://anik.info/amarBangladesh/bashaAndolon.php";
 
     public void getData() {
 

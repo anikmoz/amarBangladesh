@@ -68,7 +68,7 @@ public class News extends AppCompatActivity {
     }
 
 
-    private static final String newsList = "http://learnfromgame.com/amarBangladesh/news.php";
+    private static final String newsList = "http://anik.info/amarBangladesh/news.php";
 
 
     public void getData() {
